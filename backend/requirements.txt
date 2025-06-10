@@ -1,0 +1,8 @@
+Django
+django-cors-headers
+django-rest-framework
+djangorestframework-simplejwt
+PyJWT
+pytz
+sqlparse
+python-dotenv
