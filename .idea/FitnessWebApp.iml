@@ -19,6 +19,7 @@
       <sourceFolder url="file://$MODULE_DIR$/backend/backend" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/frontend" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (BoraHealthApp) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
