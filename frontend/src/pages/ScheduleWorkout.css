@@ -1,0 +1,64 @@
+.schedule-page { padding: 1rem; }
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls button,
+.controls .add-btn {
+  margin-left: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.controls button:hover,
+.controls .add-btn:hover {
+  background: #1565c0;
+}
+
+/* Wrapper for each day’s header */
+.rbc-header-with-button {
+  position: relative;
+  display: inline-block;      /* shrink-wrap contents */
+  padding-right: 1.5rem;      /* room for the button */
+}
+
+/* The date label stays fully visible */
+.rbc-header-label {
+  font-weight: normal;
+  z-index: 1;
+}
+
+/* The "+" button: hidden until hover */
+.rbc-date-add-btn {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: rgba(76, 175, 80, 0.8);
+  border: none;
+  color: white;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  visibility: hidden;/* hide by default */
+  transition: background 150ms ease, visibility 150ms ease;
+}
+
+/* On hover of the entire header cell, show the button */
+.rbc-header-with-button:hover .rbc-date-add-btn {
+  visibility: visible;
+}
+
+/* Button hover state */
+.rbc-date-add-btn:hover {
+  background: rgba(76, 175, 80, 1);
+}

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getToken } from '../utils/auth'   // your JWT helper
+//import { getProfile, updateProfile } from '../api'
+//import { listWorkouts } from '../api'
 
 export default function Settings() {
   const [form, setForm] = useState({

@@ -1,0 +1,126 @@
+.cw-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cw-form h1 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.cw-form label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.cw-form input[type="text"],
+.cw-form input[type="date"],
+.cw-form select,
+.cw-form textarea,
+.cw-form input[type="number"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cw-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.cw-row > div {
+  flex: 1;
+}
+
+.cw-duration {
+  border: none;
+  padding: 0;
+}
+
+.cw-duration-inputs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.cw-duration-inputs input {
+  width: 3rem;
+  text-align: center;
+}
+
+.cw-fieldset {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.cw-fieldset legend {
+  padding: 0 0.5rem;
+  font-weight: 500;
+}
+
+.cw-calories {
+  flex: 2;
+}
+
+.cw-calc-btn {
+  flex: 1;
+  margin-top: 1.75rem;
+  background: #0288d1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cw-calc-btn:hover {
+  background: #0277bd;
+}
+
+.cw-addl-toggle {
+  background: none;
+  border: none;
+  color: #0288d1;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.cw-addl-section {
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 4px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cw-addl-section label {
+  flex-basis: 100%;
+}
+
+.cw-addl-section input {
+  width: 6rem;
+}
+
+.cw-save-btn {
+  margin-top: 1rem;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cw-save-btn:hover {
+  background: #1565c0;
+}

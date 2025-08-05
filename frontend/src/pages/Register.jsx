@@ -1,7 +1,5 @@
 import Form from "../components/Form.jsx";
 
-function  Register() {
-    return <Form route="/api/user/register/" method="register" />
+export default function Login() {
+  return <Form method="login" />;
 }
-
-export default Register;

@@ -1,0 +1,67 @@
+.home-dashboard {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.upcoming-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+}
+
+.upcoming-card h2 {
+  margin-bottom: 1rem;
+}
+
+.upcoming-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upcoming-card li + li {
+  margin-top: 0.75rem;
+}
+
+/* Right side grid of actions */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(120px, auto);
+  gap: 1.5rem;
+}
+
+/* Each card */
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.action-card img {
+  width: 40px;
+  margin-bottom: 0.75rem;
+}
+
+/* Make “Set Goals” span both columns */
+.set-goals {
+  grid-column: 1 / -1;
+}

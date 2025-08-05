@@ -14,7 +14,7 @@ class Profile(models.Model):
 
     class Meta:
         db_table = 'api_profile'
-        managed = False   # if you want to keep using the existing SQL table
+        managed = False   # keep using the existing SQL table
 
     def __str__(self):
         return f"{self.user.username}'s profile"
@@ -25,7 +25,7 @@ class WorkoutType(models.Model):
 
     class Meta:
         db_table = "workouttypes"
-        managed = False  # since you’re using the existing SQL schema
+        managed = False  # since using the existing SQL schema
 
     def __str__(self):
         return self.name
