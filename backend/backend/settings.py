@@ -90,9 +90,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-MIGRATION_MODULES = {
-  "api": None,
-}
+#MIGRATION_MODULES = {
+  #'api',
+#}
 
 
 # Database

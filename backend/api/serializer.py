@@ -6,7 +6,7 @@ from .models import (
     Workout,
     ScheduledWorkout,
     Goal,
-    Profile,
+    User,
 )
 
 #convert serializers into JSON data
@@ -21,10 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
             user = User.objects.create_user(**validated_data)
             return user
 
-# Serializer for the user profile
+# Serializer for the user
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
+        model = User
         fields = ('name', 'sex', 'height', 'weight')
         read_only_fields = ['user']
 
