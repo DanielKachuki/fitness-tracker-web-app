@@ -16,7 +16,7 @@ router.register(r'goals',            GoalViewSet,              basename='goal')
 
 urlpatterns = [
     # GET /api/profile/  and PUT /api/profile/
-    path('profile/', profile_detail, name='profile-detail'),
+    #path('profile/', profile_detail, name='profile-detail'),
 
     # include all the router-registered endpoints
     path('', include(router.urls)),

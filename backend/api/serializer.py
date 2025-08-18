@@ -40,12 +40,13 @@ class ProfileSerializer(serializers.ModelSerializer):
 class WorkoutTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = WorkoutType
-        fields = ['id', 'name']
+        fields = ['workout_type_id', 'workout_name']
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout
-        fields = ['id', 'user', 'workout_type', 'duration', 'workout_date', 'rpe', 'notes']
+        fields = ['workout_id', 'workout_type', 'duration', 'workout_date', 'rpe', 'notes']
+        read_only_fields = ['workout_id']
 
 class ScheduledWorkoutSerializer(serializers.ModelSerializer):
     class Meta:

@@ -86,7 +86,12 @@ export default function CreateWorkout() {
           >
             <option value="">Select an activity</option>
             {types.map(t => (
-              <option key={t.id} value={t.id}>{t.name}</option>
+              <option
+                key={t.workout_type_id}
+                value={t.workout_type_id}
+              >
+                {t.workout_name}
+              </option>
             ))}
           </select>
         </div>
