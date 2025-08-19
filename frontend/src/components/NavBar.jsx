@@ -11,8 +11,8 @@ export default function NavBar() {
         margin: 0,
         padding: 0,
       }}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/profile">Settings</Link></li>
+        <li><Link to="/home">Home</Link></li>
+        <li><Link to="/settings">Settings</Link></li>
         <li><Link to="/workouts">Workouts</Link></li>
         <li><Link to="/goals">Goals</Link></li>
         <li><Link to="/logout">Logout</Link></li>

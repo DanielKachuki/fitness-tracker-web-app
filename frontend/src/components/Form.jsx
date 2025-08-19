@@ -22,7 +22,7 @@ export default function Form({ method }) {
         const { access, refresh } = await api.login({ username, password });
         localStorage.setItem(ACCESS_TOKEN, access);
         localStorage.setItem(REFRESH_TOKEN, refresh);
-        navigate("/");
+        navigate("/home");
       } else {
         // Call the dedicated register helper
         await api.register({ username, password });

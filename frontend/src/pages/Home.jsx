@@ -19,8 +19,7 @@ export default function Home() {
         {upcoming.length ? (
           <ul>
             {upcoming.map(s => {
-              // if workout_type is an object, use its name,
-              // otherwise just display the ID
+
               const typeLabel =
                 s.workout_type && typeof s.workout_type === 'object'
                   ? s.workout_type.name
@@ -41,7 +40,7 @@ export default function Home() {
       </div>
 
       <div className="actions-grid">
-        <Link to="/workouts" className="action-card">
+        <Link to="/workouts/new" className="action-card">
           <img src="/icons/log.svg" alt="" />
           <span>Log Workout</span>
         </Link>
