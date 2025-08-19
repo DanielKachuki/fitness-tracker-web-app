@@ -1,156 +1,107 @@
+#app/models.py
 from django.db import models
 
 class User(models.Model):
-    user_id     = models.AutoField(primary_key=True, db_column='userID')
-    username    = models.CharField(max_length=30, unique=True, db_column='userName')
-    password    = models.CharField(max_length=255,       db_column='PW')
-    screen_name = models.CharField(max_length=50,        db_column='screenName')
-    sex         = models.CharField(
-                    max_length=1,
-                    choices=[('M','Male'),('F','Female')],
-                    blank=True,
-                    null=True,
-                    db_column='sex'
-                  )
-    height      = models.DecimalField(
-                    max_digits=6,
-                    decimal_places=2,
-                    blank=True,
-                    null=True,
-                    db_column='height'
-                  )
-    weight      = models.DecimalField(
-                    max_digits=6,
-                    decimal_places=2,
-                    blank=True,
-                    null=True,
-                    db_column='weight'
-                  )
+    SEX_CHOICES = (
+        ("M", "Male"),
+        ("F", "Female"),
+    )
+    userid = models.AutoField(db_column="userID", primary_key=True)
+    username = models.CharField(db_column="userName", max_length=30)
+    pw = models.CharField(db_column="PW", max_length=255)  # store hash only
+    screenname = models.CharField(db_column="screenName", max_length=50)
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES, null=True, blank=True)
+    height = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    weight = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
 
     class Meta:
-        db_table = 'Users'
+        managed = False
+        db_table = "Users"
 
     def __str__(self):
-        return self.screen_name
+        return self.screenname or self.username
 
 
 class WorkoutType(models.Model):
-    workout_type_id = models.AutoField(primary_key=True, db_column='workoutTypeID')
-    workout_name    = models.CharField(max_length=50, unique=True, db_column='workoutName')
+    workouttypeid = models.AutoField(db_column="workoutTypeID", primary_key=True)
+    workoutname = models.CharField(db_column="workoutName", max_length=50, unique=True)
 
     class Meta:
-        db_table = 'WorkoutTypes'
+        managed = False
+        db_table = "WorkoutTypes"
 
     def __str__(self):
-        return self.workout_name
+        return self.workoutname
 
 
 class Workout(models.Model):
-    workout_id   = models.AutoField(primary_key=True, db_column='workoutID')
-    user         = models.ForeignKey(
-                     User,
-                     on_delete=models.CASCADE,
-                     related_name='workouts',
-                     db_column='userID'
-                   )
-    workout_type = models.ForeignKey(
-                     WorkoutType,
-                     on_delete=models.CASCADE,
-                     related_name='workouts',
-                     db_column='workoutType'
-                   )
-    duration     = models.DurationField(db_column='duration')
-    workout_date = models.DateField(db_column='workoutDate')
-    rpe          = models.PositiveSmallIntegerField(
-                     blank=True,
-                     null=True,
-                     db_column='RPE'
-                   )
-    notes        = models.TextField(blank=True, null=True, db_column='notes')
+    workoutid = models.AutoField(db_column="workoutID", primary_key=True)
+    user = models.ForeignKey(User, models.CASCADE, db_column="userID", related_name="workouts")
+    workouttype = models.ForeignKey(
+        WorkoutType, models.CASCADE, db_column="workoutType", related_name="workouts"
+    )
+    duration = models.TimeField()  # HH:MM:SS per MySQL TIME
+    workoutdate = models.DateField(db_column="workoutDate")
+    rpe = models.PositiveSmallIntegerField(db_column="RPE", null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
 
     class Meta:
-        db_table = 'Workouts'
+        managed = False
+        db_table = "Workouts"
         indexes = [
-            models.Index(fields=['user'], name='indexUserDate'),
+            models.Index(fields=["user", "workoutdate"], name="indexUserDate"),
         ]
 
     def __str__(self):
-        return f"{self.user.screen_name} – {self.workout_type.workout_name} on {self.workout_date}"
+        return f"{self.user_id} • {self.workouttype_id} @ {self.workoutdate}"
 
 
 class ScheduledWorkout(models.Model):
-    scheduled_workout_id = models.AutoField(primary_key=True, db_column='scheduledWorkoutID')
-    user                 = models.ForeignKey(
-                             User,
-                             on_delete=models.CASCADE,
-                             related_name='scheduled_workouts',
-                             db_column='userID'
-                           )
-    workout_type         = models.ForeignKey(
-                             WorkoutType,
-                             on_delete=models.CASCADE,
-                             related_name='scheduled_workouts',
-                             db_column='workoutType'
-                           )
-    duration             = models.DurationField(
-                             blank=True,
-                             null=True,
-                             db_column='duration'
-                           )
-    scheduled_date       = models.DateField(db_column='scheduledDate')
+    STATUS_CHOICES = (
+        ("scheduled", "Scheduled"),
+        ("completed", "Completed"),
+        ("missed", "Missed"),
+        ("canceled", "Canceled"),
+        ("rescheduled", "Rescheduled"),
+    )
+    scheduledworkoutid = models.AutoField(db_column="scheduledWorkoutID", primary_key=True)
+    user = models.ForeignKey(User, models.CASCADE, db_column="userID", related_name="scheduled_workouts")
+    workouttype = models.ForeignKey(
+        WorkoutType, models.CASCADE, db_column="workoutType", related_name="scheduled_workouts"
+    )
+    duration = models.TimeField(null=True, blank=True)
+    scheduleddate = models.DateField(db_column="scheduledDate")
+    status = models.CharField(max_length=12, choices=STATUS_CHOICES, default="scheduled")
 
     class Meta:
-        db_table = 'ScheduledWorkouts'
+        managed = False
+        db_table = "ScheduledWorkouts"
         indexes = [
-            models.Index(fields=['user', 'scheduled_date'], name='indexScheduledDate'),
+            models.Index(fields=["user", "scheduleddate"], name="indexScheduledDate"),
         ]
 
     def __str__(self):
-        return f"{self.user.screen_name} scheduled {self.workout_type.workout_name} for {self.scheduled_date}"
+        return f"{self.scheduleddate} • {self.get_status_display()}"
 
 
 class Goal(models.Model):
-    goal_id       = models.AutoField(primary_key=True, db_column='goalID')
-    user          = models.ForeignKey(
-                      User,
-                      on_delete=models.CASCADE,
-                      related_name='goals',
-                      db_column='userID'
-                    )
-    goal_type     = models.ForeignKey(
-                      WorkoutType,
-                      on_delete=models.CASCADE,
-                      related_name='goals',
-                      blank=True,
-                      null=True,
-                      db_column='goalType'
-                    )
-    duration      = models.DurationField(
-                      blank=True,
-                      null=True,
-                      db_column='duration'
-                    )
-    notes         = models.TextField(blank=True, null=True, db_column='notes')
-    created_at    = models.DateTimeField(
-                      auto_now_add=True,
-                      db_column='createdAt'
-                    )
-    completed_at  = models.DateTimeField(
-                      blank=True,
-                      null=True,
-                      db_column='completedAt'
-                    )
-    is_complete   = models.BooleanField(
-                      default=False,
-                      db_column='isComplete'
-                    )
+    goalid = models.AutoField(db_column="goalID", primary_key=True)
+    user = models.ForeignKey(User, models.CASCADE, db_column="userID", related_name="goals")
+    goaltype = models.ForeignKey(
+        WorkoutType, models.CASCADE, db_column="goalType", related_name="goals", null=True, blank=True
+    )
+    duration = models.TimeField(null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
+    createdat = models.DateTimeField(db_column="createdAt")
+    completedat = models.DateTimeField(db_column="completedAt", null=True, blank=True)
+    iscomplete = models.BooleanField(db_column="isComplete", default=False)
 
     class Meta:
-        db_table = 'Goals'
+        managed = False
+        db_table = "Goals"
         indexes = [
-            models.Index(fields=['user', 'goal_type', 'is_complete'], name='indexGoalStatus'),
+            models.Index(fields=["user", "goaltype", "iscomplete"], name="indexGoalStatus"),
         ]
 
     def __str__(self):
-        status = "✔️" if self.is_complete else "❌"
-        return f"{self.user.screen_name}'s goal {status}"
+        return f"Goal #{self.goalid} ({'✔' if self.iscomplete else '…'})"
