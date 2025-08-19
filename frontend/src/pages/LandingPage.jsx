@@ -6,7 +6,7 @@ export default function LandingPage() {
     <div className="lp-wrap">
       <header className="lp-nav">
         <div className="brand">
-          <span className="dot" aria-hidden>●</span> FitTrack
+          <span className="dot" aria-hidden>●</span> FitnessTrack
         </div>
         <nav className="lp-links">
           <Link to="/login" className="btn ghost">Log in</Link>
@@ -22,19 +22,19 @@ export default function LandingPage() {
 
         {/* Card Navigation */}
         <div className="card-nav">
-          <Link to="/workouts/new" className="card">
+          <Link className="card">
             <div className="icon" aria-hidden>🏋️</div>
             <h3>Log a Workout</h3>
             <p>Quickly record name, duration, RPE, and notes.</p>
           </Link>
 
-          <Link to="/scheduled-workouts" className="card">
+          <Link className="card">
             <div className="icon" aria-hidden>📅</div>
             <h3>Schedule Workout</h3>
             <p>Plan your week with a built‑in calendar.</p>
           </Link>
 
-          <Link to="/goals" className="card">
+          <Link className="card">
             <div className="icon" aria-hidden>🎯</div>
             <h3>Set Goals</h3>
             <p>Track progress and auto‑complete via workouts.</p>
@@ -48,7 +48,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="lp-foot">
-        <small>© {new Date().getFullYear()} FitTrack</small>
+        <small>© {new Date().getFullYear()} FitnessTrack</small>
       </footer>
     </div>
   );
